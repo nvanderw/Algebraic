@@ -1,7 +1,15 @@
 module Algebraic (
     GroupPlus,
+    (>+<),
+    (>-<),
+    gzero,
+    gneg,
+
     GroupElem,
-    Ring ) where
+    Ring,
+    (>*<)
+) where
+
 
 infixl 6 >+<
 infixl 6 >-<
@@ -15,7 +23,7 @@ infixl 7 >*<
 -- 3) Every element has a unique inverse such that (inv g) + g = gzero
 -- In addition, since this specifies an additive group, instances should be
 -- commutative: g1 + g2 = g2 + g1
-class GroupPlus g where
+class (Eq g) => GroupPlus g where
     -- |Group addition
     (>+<) :: g -> g -> g
     -- |Group subtraction. A sensible default is provided.
