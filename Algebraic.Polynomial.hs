@@ -54,7 +54,8 @@ instance (Ring r) => Ring (Polynomial r) where
         arr2 = listArray (0, resultDeg) (ys ++ zeros)
 
         -- Function to get the nth coefficient of the resulting polynomial
-        getCoeff n = foldl (>+<) gzero $ map (\i -> (arr1 ! i) >*< (arr2 ! (n - i))) [0..n]
+        getCoeff n = foldl (>+<) gzero $ map
+            (\i -> (arr1 ! i) >*< (arr2 ! (n - i))) [0..n]
 
         -- Coefficients of resulting polynomial
         rs = truncateCoeffs $ map getCoeff [0..(resultDeg)]
