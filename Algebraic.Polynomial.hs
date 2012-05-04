@@ -1,6 +1,7 @@
 {-# LANGUAGE ScopedTypeVariables #-}
 module Algebraic.Polynomial (
     Polynomial,
+    evaluate,
     degree) where
 
 import Algebraic
@@ -13,6 +14,11 @@ data Polynomial r = Polynomial [r]
 -- |Strips trailing zeros from the list of coefficientse
 truncateCoeffs :: (GroupPlus r) => [r] -> [r]
 truncateCoeffs = reverse . dropWhile (== gzero) . reverse
+
+-- |Evaluation homomorphism at some element of the ring using Horner's method
+evaluate :: (Ring r) => r -> Polynomial r -> r
+evaluate _ (Polynomial []) = gzero
+evaluate r (Polynomial (x:xs)) = r >*< (evaluate r (Polynomial xs)) >+< x
 
 instance GroupPlus g => GroupPlus (Polynomial g) where
     (Polynomial xs) >+< (Polynomial ys) = Polynomial $ truncateCoeffs coeffSum 
