@@ -18,9 +18,13 @@ infixl 7 >*<
 
 -- |Specifies an additive group G, which should satisfy the "group axioms,"
 -- namely:
+--
 -- 1) Addition is associative and closed in G
+--
 -- 2) There exists a unique identity element gzero: gzero + g = g forall g
+--
 -- 3) Every element has a unique inverse such that (inv g) + g = gzero
+--
 -- In addition, since this specifies an additive group, instances should be
 -- commutative: g1 + g2 = g2 + g1
 class (Eq g) => GroupPlus g where
